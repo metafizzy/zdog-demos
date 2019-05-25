@@ -1,24 +1,21 @@
 // ------------------------- demo ------------------------- //
 
-var illoElem = document.querySelector('.illo');
 var sceneSize = 270;
-var minWindowSize = Math.min( window.innerWidth - 20 , window.innerHeight - 20 );
-var zoom = Math.floor( minWindowSize / (sceneSize/2) ) / 2;
-var illoSize = sceneSize * zoom;
-illoElem.setAttribute( 'width', illoSize );
-illoElem.setAttribute( 'height', illoSize );
 var isSpinning = false;
 var TAU = Zdog.TAU;
 var initialRotate = new Zdog.Vector({ x: -35, y: -45 }).multiply( TAU/360 );
 
 var illo = new Zdog.Illustration({
-  element: illoElem,
-  zoom: zoom,
+  element: '.illo',
   rotate: initialRotate,
   dragRotate: true,
+  resize: 'fullscreen',
   onDragStart: function() {
     isSpinning = false;
   },
+  onResize: function( width, height ) {
+    this.zoom = Math.floor( Math.min( width, height ) / sceneSize );
+  }
 });
 
 // ----- model ----- //
@@ -32,7 +29,8 @@ var letterGroup = new Zdog.Group({
   addTo: bird,
 });
 
-var R = new Zdog.Shape({
+// R
+new Zdog.Shape({
   addTo: letterGroup,
   path: [
     { x: -55, y: -55 },
@@ -56,7 +54,8 @@ var R = new Zdog.Shape({
   fill: true,
 });
 
-var G = new Zdog.Shape({
+// G
+new Zdog.Shape({
   addTo: letterGroup,
   path: [
     { x: 0, y: -55 },
@@ -90,7 +89,8 @@ var G = new Zdog.Shape({
   fill: true,
 });
 
-var B = new Zdog.Shape({
+// B
+new Zdog.Shape({
   addTo: letterGroup,
   path: [
     { x: -55, y: -55 },

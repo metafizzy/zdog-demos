@@ -1,29 +1,25 @@
 {
-  "name": "zdog",
-  "version": "0.1.0",
-  "description": "Round, flat, designer-friendly pseudo-3D engine",
-  "main": "js/index.js",
-  "dependencies": {},
+  "name": "zdog-demos",
+  "version": "1.0.0",
+  "description": "Bigger, wilder Zdog demos",
+  "dependencies": {
+    "zdog": "^1.0.0"
+  },
   "devDependencies": {
-    "jshint": "^2.10.2",
-    "uglify-js": "^3.5.3"
+    "jshint": "^2.10.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/metafizzy/zdog.git"
+    "url": "git+https://github.com/metafizzy/zdog-demos.git"
   },
-  "keywords": [
-    "3D",
-    "canvas",
-    "svg"
-  ],
   "author": "David DeSandro",
+  "private": true,
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/metafizzy/zdog/issues"
+    "url": "https://github.com/metafizzy/zdog-demos/issues"
   },
   "homepage": "https://zzz.dog"
 }
