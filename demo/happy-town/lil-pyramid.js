@@ -1,6 +1,6 @@
-// -------------------------- lilPyramid -------------------------- //
+/* globals TAU, navy, red */
 
-function lilPyramid( options ) {
+window.lilPyramid = function( options ) {
   var anchor = new Zdog.Anchor({
     addTo: options.addTo,
     translate: options.translate,
@@ -29,4 +29,4 @@ function lilPyramid( options ) {
     color: navy,
   });
 
-}
+};

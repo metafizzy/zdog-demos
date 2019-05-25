@@ -1,4 +1,6 @@
-function makeBird( options ) {
+/* globals TAU */
+
+window.makeBird = function( options ) {
 
   var spin = options.spin || 0;
 
@@ -93,4 +95,4 @@ function makeBird( options ) {
     rotate: { x: -TAU/8 },
   });
 
-}
+};

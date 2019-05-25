@@ -1,6 +1,6 @@
 /* globals makeBuilding */
 
-function oneStoryBuilding( options ) {
+window.oneStoryBuilding = function( options ) {
 
   var anchor = new Zdog.Anchor({
     addTo: options.addTo,
@@ -28,9 +28,9 @@ function oneStoryBuilding( options ) {
 
   makeBuilding( buildOptions );
 
-}
+};
 
-function twoStoryBuilding( options ) {
+window.twoStoryBuilding = function( options ) {
 
   var anchor = new Zdog.Anchor({
     addTo: options.addTo,
@@ -63,10 +63,10 @@ function twoStoryBuilding( options ) {
 
   makeBuilding( buildOptions );
 
-}
+};
 
 
-function oneStorySlanter( options ) {
+window.oneStorySlanter = function( options ) {
 
   var anchor = new Zdog.Anchor({
     addTo: options.addTo,
@@ -89,4 +89,4 @@ function oneStorySlanter( options ) {
     ],
   });
 
-}
+};

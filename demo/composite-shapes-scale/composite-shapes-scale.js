@@ -65,7 +65,7 @@ new Zdog.Hemisphere({
   stroke: false,
 });
 
-var cyl = new Zdog.Cylinder({
+new Zdog.Cylinder({
   diameter: 4,
   length: 4,
   scale: 2,

@@ -1,4 +1,6 @@
-function hedge( options ) {
+/* globals navy */
+
+window.hedge = function( options ) {
   var anchor = new Zdog.Anchor({
     addTo: options.addTo,
     translate: options.translate,
@@ -21,4 +23,4 @@ function hedge( options ) {
     stroke: 2.5,
     translate: { y: -7.5 },
   });
-}
+};

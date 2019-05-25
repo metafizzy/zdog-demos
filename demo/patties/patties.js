@@ -45,7 +45,7 @@ new Zdog.Shape({
   translate: { y: -10, z: 2 },
   stroke: 2,
   color: '#EA0',
-})
+});
 
 // ----- animate ----- //
 

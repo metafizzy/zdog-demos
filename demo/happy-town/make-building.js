@@ -1,8 +1,8 @@
-/* globals red, blue, navy, gold, white */
+/* globals TAU, red, blue, navy, gold, white */
 
 // -------------------------- makeBuilding -------------------------- //
 
-function makeBuilding( options ) {
+window.makeBuilding = function( options ) {
 
   var wallX = options.width/2;
   var wallY = options.height;
@@ -138,7 +138,7 @@ function makeBuilding( options ) {
   }
 
   return building;
-}
+};
 
 function handleWindows( options, windowProperty, wallGroup, color ) {
   var windowOption = options[ windowProperty ];

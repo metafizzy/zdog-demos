@@ -9,7 +9,7 @@
 // northOffset
 // southOffset
 
-function makeRock( options ) {
+window.makeRock = function( options ) {
 
   var x = options.width/2;
   var z = options.depth/2;
@@ -80,4 +80,4 @@ function makeRock( options ) {
     topWestSouth,
   ]);
 
-}
+};
