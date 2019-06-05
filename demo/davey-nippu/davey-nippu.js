@@ -5,12 +5,11 @@ Zdog.RoundedRect.prototype.updateSortValue =
 Zdog.Ellipse.prototype.updateSortValue = Zdog.Shape.prototype.updateSortValue;
 
 var illoElem = document.querySelector('.illo');
-var w = 128;
-var h = 128;
-var minWindowSize = Math.min( window.innerWidth, (window.innerHeight - 60) );
-var zoom = Math.floor( minWindowSize / w );
-illoElem.setAttribute( 'width', w * zoom );
-illoElem.setAttribute( 'height', h * zoom );
+var illoSize = 128;
+var minWindowSize = Math.min( window.innerWidth - 20, (window.innerHeight - 60) );
+var zoom = Math.floor( minWindowSize / illoSize );
+illoElem.setAttribute( 'width', illoSize * zoom );
+illoElem.setAttribute( 'height', illoSize * zoom );
 
 var isSpinning = true;
 var TAU = Zdog.TAU;
@@ -822,17 +821,18 @@ var ground = new Zdog.Anchor({
 
 })();
 
-// -- animate --- //
+// ----- animate ----- //
 
-var t = 0;
-var tSpeed = 1/240;
+var ticker = 0;
+var cycleCount = 240;
 
 function animate() {
   // update
   if ( isSpinning ) {
-    t += tSpeed;
-    var theta = Zdog.easeInOut( t % 1 ) * TAU;
+    var progress = ticker / cycleCount;
+    var theta = Zdog.easeInOut( progress % 1 ) * TAU;
     illo.rotate.y = -theta + sceneStartRotation.y;
+    ticker++;
   }
 
   illo.updateRenderGraph();

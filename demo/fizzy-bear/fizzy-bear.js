@@ -6,13 +6,12 @@ var unibodyCanvas = document.createElement('canvas');
 var bodyLinesCanvas = document.createElement('canvas');
 // document.body.appendChild( unibodyCanvas );
 // document.body.appendChild( bodyLinesCanvas );
-var w = 88;
-var h = 88;
+var illoSize = 88;
 var minWindowSize = Math.min( window.innerWidth, window.innerHeight );
-var zoom = Math.min( 6, Math.floor( minWindowSize / w ) );
+var zoom = Math.floor( minWindowSize / illoSize );
 
-var canvasWidth = illoElem.width = w * zoom;
-var canvasHeight = illoElem.height = h * zoom;
+var canvasWidth = illoElem.width = illoSize * zoom;
+var canvasHeight = illoElem.height = illoSize * zoom;
 unibodyCanvas.width = bodyLinesCanvas.width = canvasWidth;
 unibodyCanvas.height = bodyLinesCanvas.height = canvasHeight;
 

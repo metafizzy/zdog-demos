@@ -1,16 +1,14 @@
 // -------------------------- demo -------------------------- //
 
 var illoElem = document.querySelector('.illo');
-var w = 24;
-var h = 24;
+var illoSize = 24;
 var minWindowSize = Math.min( window.innerWidth - 20, window.innerHeight - 40 );
-var zoom = Math.floor( minWindowSize / w );
-illoElem.setAttribute( 'width', w * zoom );
-illoElem.setAttribute( 'height', h * zoom );
+var zoom = Math.floor( minWindowSize / illoSize );
+illoElem.setAttribute( 'width', illoSize * zoom );
+illoElem.setAttribute( 'height', illoSize * zoom );
 
 [ Zdog.Shape, Zdog.Rect ].forEach( function( ItemClass ) {
   ItemClass.defaults.fill = true;
-  // ItemClass.defaults.stroke = true;
   ItemClass.defaults.backface = false;
   ItemClass.defaults.stroke = 1/zoom;
 });
@@ -228,16 +226,8 @@ makeWall({
 
 // -- animate --- //
 
-var t = 0;
-var tSpeed = 1/105;
-
-// var keyframes = [
-//   { x: -1/4, y: -1/4 },
-//   { x: -35/350, y: 1/8 },
-//   { x: 0, y: 2/4 },
-//   { x: -35/350, y: 5/8 },
-//   { x: -1/4, y: 3/4 },
-// ];
+var ticker = 0;
+var cycleCount = 105;
 
 var keyframes = [
   { x: TAU * 0,       y: TAU * 1/4 },
@@ -250,20 +240,18 @@ var keyframes = [
 function animate() {
   // update
   if ( isSpinning ) {
-    var easeT = Zdog.easeInOut( t % 1, 4 );
+    var progress = ticker / cycleCount;
+    var tween = Zdog.easeInOut( progress % 1, 4 );
     var turnLimit = keyframes.length - 1;
-    var turn = Math.floor( t % turnLimit );
+    var turn = Math.floor( progress % turnLimit );
     var keyA = keyframes[ turn ];
     var keyB = keyframes[ turn + 1 ];
-    illo.rotate.x = Zdog.lerp( keyA.x, keyB.x, easeT );
-    illo.rotate.y = Zdog.lerp( keyA.y, keyB.y, easeT );
-    t += tSpeed;
+    illo.rotate.x = Zdog.lerp( keyA.x, keyB.x, tween );
+    illo.rotate.y = Zdog.lerp( keyA.y, keyB.y, tween );
+    ticker++;
   }
 
-  illo.updateGraph();
-
-  // render
-  illo.renderGraph();
+  illo.updateRenderGraph();
   requestAnimationFrame( animate );
 }
 

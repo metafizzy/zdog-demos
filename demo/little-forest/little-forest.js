@@ -1,12 +1,11 @@
 // -------------------------- demo -------------------------- //
 
 var illoElem = document.querySelector('.illo');
-var w = 360;
-var h = 360;
-var minWindowSize = Math.min( window.innerWidth, window.innerHeight - 40 );
-var zoom = Math.min( 3, Math.floor( minWindowSize / (w/2) ) / 2 );
-illoElem.setAttribute( 'width', w * zoom );
-illoElem.setAttribute( 'height', h * zoom );
+var illoSize = 360;
+var minWindowSize = Math.min( window.innerWidth - 20, window.innerHeight - 60 );
+var zoom = Math.min( 3, Math.floor( minWindowSize / (illoSize/4) ) / 4 );
+illoElem.setAttribute( 'width', illoSize * zoom );
+illoElem.setAttribute( 'height', illoSize * zoom );
 
 var isSpinning = true;
 var TAU = Zdog.TAU;
@@ -39,11 +38,16 @@ var background = new Zdog.Shape({
   addTo: illo,
 });
 
+var bgGroup1 = new Zdog.Group({
+  addTo: background,
+  translate: { z: -24 },
+});
+
 var bgStripe = new Zdog.Rect({
   width: 180,
   height: 44,
-  addTo: background,
-  translate: { y: -40, z: -24 },
+  addTo: bgGroup1,
+  translate: { y: -40 },
   color: magenta,
   stroke: 12,
   fill: true,
@@ -51,37 +55,49 @@ var bgStripe = new Zdog.Rect({
 // magenta circle
 var bgCircle = new Zdog.Ellipse({
   diameter: 96,
-  addTo: background,
-  translate: { y: -16, z: -24 },
+  addTo: bgGroup1,
+  translate: { y: -16 },
   color: magenta,
   stroke: 24,
   fill: true,
 });
 
+var bgGroup2 = new Zdog.Group({
+  addTo: background,
+});
+
 // amber stripe
 bgStripe.copy({
+  addTo: bgGroup2,
   translate: { y: -8 },
   color: amber,
 });
 // amber circle
 bgCircle.copy({
+  addTo: bgGroup2,
   diameter: 64,
   translate: { y: -16, },
   color: amber,
 });
 
+var bgGroup3 = new Zdog.Group({
+  addTo: background,
+  translate: { z: 24 },
+});
+
 // gold bg stripe
 bgStripe.copy({
+  addTo: bgGroup3,
   height: 60,
-  addTo: background,
-  translate: { y: 32, z: 24 },
+  translate: { y: 32 },
   color: gold,
 });
 // gold circle
 bgCircle.copy({
+  addTo: bgGroup3,
   width: 32,
   height: 32,
-  translate: { y: -16, z: 24 },
+  translate: { y: -16 },
   color: gold,
 });
 

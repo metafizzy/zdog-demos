@@ -1,12 +1,11 @@
-// -------------------------- demo -------------------------- //
+// ----- setup ----- //
 
 var illoElem = document.querySelector('.illo');
-var w = 48;
-var h = 48;
+var illoSize = 48;
 var minWindowSize = Math.min( window.innerWidth, window.innerHeight );
-var zoom = Math.floor( minWindowSize / w );
-illoElem.setAttribute( 'width', w * zoom );
-illoElem.setAttribute( 'height', h * zoom );
+var zoom = Math.floor( minWindowSize / illoSize );
+illoElem.setAttribute( 'width', illoSize * zoom );
+illoElem.setAttribute( 'height', illoSize * zoom );
 
 var TAU = Zdog.TAU;
 var isSpinning = true;
@@ -27,7 +26,7 @@ var prism = new Zdog.Anchor({
   addTo: illo,
 });
 
-// -- illustration shapes --- //
+// ----- model ----- //
 
 var RT2 = Math.sqrt(2);
 var capLength = 6/RT2;
@@ -67,22 +66,22 @@ side.copy({
 
 // -- animate --- //
 
-var t = 0;
-var tSpeed = 1/90;
-
+var ticker = 0;
+var cycleCount = 90;
 
 function animate() {
   // update
   if ( isSpinning ) {
-    var easeT = Zdog.easeInOut( t % 1, 3 );
-    var turn = Math.floor( t );
+    var progress = ticker / cycleCount;
+    var tween = Zdog.easeInOut( progress % 1, 3 );
+    var turn = Math.floor( progress );
     if ( turn === 0 ) {
-      illo.rotate.z = Zdog.lerp( TAU/8 * -3, TAU/8, easeT );
-      illo.rotate.x = Zdog.lerp( 0, tiltAngle, easeT );
+      illo.rotate.z = Zdog.lerp( TAU/8 * -3, TAU/8, tween );
+      illo.rotate.x = Zdog.lerp( 0, tiltAngle, tween );
     } else if ( turn == 1 ) {
-      prism.rotate.x = Zdog.lerp( -TAU/2, 0, easeT );
+      prism.rotate.x = Zdog.lerp( -TAU/2, 0, tween );
     }
-    t += tSpeed;
+    ticker++;
   }
 
   illo.updateRenderGraph();
@@ -97,7 +96,7 @@ animate();
 document.querySelector('.reset-button').onclick = reset;
 
 function reset() {
-  t = 0;
+  ticker = 0;
   illo.rotate.set({});
   isSpinning = true;
 }

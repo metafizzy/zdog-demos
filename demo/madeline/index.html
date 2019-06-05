@@ -46,6 +46,10 @@
 <script src="../../node_modules/zdog/js/dragger.js"></script>
 <script src="../fps-counter.js"></script>
 <script src="../../node_modules/zdog/js/illustration.js"></script>
+<script>
+// HACK - better z-sort separation of shapes
+Zdog.Ellipse.prototype.updateSortValue = Zdog.Shape.prototype.updateSortValue;
+</script>
 <script src="bokeh-shape.js"></script>
 <script src="make-madeline.js"></script>
 <script src="make-bird.js"></script>

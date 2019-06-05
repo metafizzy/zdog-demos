@@ -1,12 +1,11 @@
 // -------------------------- demo -------------------------- //
 
 var illoElem = document.querySelector('.illo');
-var w = 64;
-var h = 64;
-var minWindowSize = Math.min( window.innerWidth, window.innerHeight );
-var zoom = Math.min( 10, Math.floor( minWindowSize / w ) );
-illoElem.setAttribute( 'width', w * zoom );
-illoElem.setAttribute( 'height', h * zoom );
+var illoSize = 64;
+var minWindowSize = Math.min( window.innerWidth - 20, window.innerHeight - 80 );
+var zoom = Math.floor( minWindowSize / illoSize );
+illoElem.setAttribute( 'width', illoSize * zoom );
+illoElem.setAttribute( 'height', illoSize * zoom );
 
 var isSpinning = true;
 var TAU = Zdog.TAU;
@@ -224,7 +223,7 @@ diamondPanel.copy({
   color: 'hsla(60, 100%, 50%, 0.1)',
 });
 
-// -- animate --- //
+// ----- animate ----- //
 
 function animate() {
   illo.rotate.y += isSpinning ? -TAU/150 : 0;

@@ -1,12 +1,11 @@
 // -------------------------- demo -------------------------- //
 
 var illoElem = document.querySelector('.illo');
-var w = 64;
-var h = 64;
+var illoSize = 64;
 var minWindowSize = Math.min( window.innerWidth, window.innerHeight );
-var zoom = Math.min( 10, Math.floor( minWindowSize / w ) );
-illoElem.setAttribute( 'width', w * zoom );
-illoElem.setAttribute( 'height', h * zoom );
+var zoom = Math.floor( minWindowSize / illoSize );
+illoElem.setAttribute( 'width', illoSize * zoom );
+illoElem.setAttribute( 'height', illoSize * zoom );
 
 var isSpinning = true;
 var TAU = Zdog.TAU;
@@ -32,7 +31,7 @@ var blue = '#8AD';
 
 var colorWheel = [ beige, magenta, orange, blue, yellow ];
 
-// -- illustration shapes --- //
+// ----- model ----- //
 
 // top & bottom
 var cone = new Zdog.Cone({
@@ -122,11 +121,12 @@ cone.copy({
 
 var keyframes = [
   { x: TAU * 0,   y: TAU * 0 },
-  { x: TAU * 1/2, y: TAU * 1/2 },
-  { x: TAU * 1,   y: TAU * 1 },
+  { x: TAU * 1/2, y: TAU * -1/2 },
+  { x: TAU * 1,   y: TAU * -1 },
 ];
 
-var t = 0;
+var ticker = 0;
+var cycleCount = 180;
 
 function animate() {
   spin();
@@ -142,13 +142,14 @@ function spin() {
   if ( !isSpinning ) {
     return;
   }
-  var easeT = Zdog.easeInOut( t % 1, 3 );
+  var progress = ticker / cycleCount;
+  var tween = Zdog.easeInOut( progress % 1, 3 );
   var turnLimit = keyframes.length - 1;
-  var turn = Math.floor( t % turnLimit );
+  var turn = Math.floor( progress % turnLimit );
   var keyA = keyframes[ turn ];
   var keyB = keyframes[ turn + 1 ];
-  var thetaX = Zdog.lerp( keyA.x, keyB.x, easeT );
+  var thetaX = Zdog.lerp( keyA.x, keyB.x, tween );
   illo.rotate.x = Math.cos( thetaX ) * TAU/12;
-  illo.rotate.y = Zdog.lerp( keyA.y, keyB.y, easeT ) ;
-  t += 1/180;
+  illo.rotate.y = Zdog.lerp( keyA.y, keyB.y, tween ) ;
+  ticker++;
 }

@@ -1,15 +1,14 @@
-// -------------------------- demo -------------------------- //
+// ----- setup ----- //
 
-var canvas = document.querySelector('canvas');
+var illoCanvas = document.querySelector('.illo');
 var proxyCanvas = document.createElement('canvas');
-var ctx = canvas.getContext('2d');
-var w = 14 * Math.sqrt(2);
-var h = 14 * Math.sqrt(2);
+var ctx = illoCanvas.getContext('2d');
+var illoSize = 14 * Math.sqrt(2);
 var minWindowSize = Math.min( window.innerWidth - 20, window.innerHeight - 20 );
-var zoom = Math.floor( minWindowSize / w );
+var zoom = Math.floor( minWindowSize / illoSize );
 
-var canvasWidth = canvas.width = w * zoom;
-var canvasHeight = canvas.height = h * zoom;
+var canvasWidth = illoCanvas.width = illoSize * zoom;
+var canvasHeight = illoCanvas.height = illoSize * zoom;
 var shrink = 1/3;
 proxyCanvas.width = canvasWidth * shrink;
 proxyCanvas.height = canvasHeight * shrink;
@@ -21,16 +20,13 @@ var illo = new Zdog.Illustration({
   zoom: zoom,
 });
 
-
 var isSpinning = false;
 
 var navy = '#456';
 var red = '#D21';
-var ochre = '#F90';
+var orange = '#F90';
 
-document.body.style.backgroundColor = '#EDC';
-
-// -- illustration shapes --- //
+// ----- model ----- //
 
 function makePrism( options ) {
   var prism = new Zdog.Anchor({
@@ -72,7 +68,7 @@ function makePrism( options ) {
       { x:  0, y: -1, z: -1 },
       { x:  0, y:  1, z:  1 },
     ],
-    color: ochre,
+    color: orange,
     fill: true,
     stroke: 1/zoom,
   });
@@ -156,7 +152,8 @@ function render() {
   ctx.clearRect( 0, 0, canvasWidth, canvasHeight );
 
   ctx.save();
-  ctx.translate( Math.round( w * shrink * zoom ), Math.round( h * shrink * zoom ) );
+  var center = Math.round( illoSize * shrink * zoom );
+  ctx.translate( center, center );
 
   for ( var col = -2; col < 3; col++ ) {
     for ( var row = -2; row < 3; row++ ) {
@@ -183,7 +180,7 @@ animate();
 var dragStartRX, dragStartRY;
 
 new Zdog.Dragger({
-  startElement: canvas,
+  startElement: illoCanvas,
   onDragStart: function() {
     isSpinning = false;
     dragStartRX = illo.rotate.x;

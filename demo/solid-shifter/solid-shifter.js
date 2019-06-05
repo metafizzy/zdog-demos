@@ -1,14 +1,13 @@
 /* globals Shifter */
 
-// -------------------------- demo -------------------------- //
+// ----- setup ----- //
 
 var illoElem = document.querySelector('.illo');
-var w = 10;
-var h = 10;
-var minWindowSize = Math.min( window.innerWidth, window.innerHeight - 40 );
-var zoom = Math.floor( minWindowSize / w );
-illoElem.setAttribute( 'width', w * zoom );
-illoElem.setAttribute( 'height', h * zoom );
+var illoSize = 10;
+var minWindowSize = Math.min( window.innerWidth - 20, window.innerHeight - 20 );
+var zoom = Math.floor( minWindowSize / illoSize );
+illoElem.setAttribute( 'width', illoSize * zoom );
+illoElem.setAttribute( 'height', illoSize * zoom );
 
 var illo = new Zdog.Illustration({
   element: illoElem,
@@ -16,7 +15,7 @@ var illo = new Zdog.Illustration({
   dragRotate: true,
 });
 
-// -- illustration shapes --- //
+// ----- model ----- //
 
 var shifterA = new Shifter({
   addTo: illo,
@@ -30,18 +29,18 @@ var shifterC = new Shifter({
   translate: { x: 3 },
 });
 
-// -- animate --- //
+// ----- animate ----- //
 
-var t = 0;
-var tSpeed = 1/80;
+var ticker = 0;
+var cycleCount = 80;
 
 function animate() {
   // update
-  shifterA.update( t + 4 );
-  shifterB.update( t + 2 );
-  shifterC.update( t + 0 );
-
-  t += tSpeed;
+  var progress = ticker / cycleCount;
+  shifterA.update( progress + 4 );
+  shifterB.update( progress + 2 );
+  shifterC.update( progress + 0 );
+  ticker++;
 
   illo.updateRenderGraph();
   requestAnimationFrame( animate );

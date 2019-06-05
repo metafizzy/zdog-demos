@@ -1,7 +1,6 @@
 // ------------------------- demo ------------------------- //
 
 var sceneSize = 270;
-var isSpinning = false;
 var TAU = Zdog.TAU;
 var initialRotate = new Zdog.Vector({ x: -35, y: -45 }).multiply( TAU/360 );
 
@@ -10,12 +9,9 @@ var illo = new Zdog.Illustration({
   rotate: initialRotate,
   dragRotate: true,
   resize: 'fullscreen',
-  onDragStart: function() {
-    isSpinning = false;
-  },
   onResize: function( width, height ) {
-    this.zoom = Math.floor( Math.min( width, height ) / sceneSize );
-  }
+    this.zoom = Math.floor( Math.min( width, height ) / sceneSize * 2 ) / 2;
+  },
 });
 
 // ----- model ----- //
@@ -144,7 +140,6 @@ eye.render = function( ctx ) {
 // ----- animate ----- //
 
 function animate() {
-  illo.rotate.y += isSpinning ? +TAU/150 : 0;
   illo.updateRenderGraph();
   requestAnimationFrame( animate );
 }

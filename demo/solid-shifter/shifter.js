@@ -1,5 +1,4 @@
 var navy = '#369';
-// var red = '#E21';
 var green = '#692';
 var egg = '#FED';
 var ochre = '#E83';

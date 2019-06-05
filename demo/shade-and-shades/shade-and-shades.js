@@ -1,12 +1,11 @@
 // -------------------------- demo -------------------------- //
 
 var illoElem = document.querySelector('.illo');
-var w = 96;
-var h = 96;
+var illoSize = 96;
 var minWindowSize = Math.min( window.innerWidth, window.innerHeight );
-var zoom = Math.min( 8, Math.floor( minWindowSize / w ) );
-illoElem.setAttribute( 'width', w * zoom );
-illoElem.setAttribute( 'height', h * zoom );
+var zoom = Math.min( 8, Math.floor( minWindowSize / illoSize ) );
+illoElem.setAttribute( 'width', illoSize * zoom );
+illoElem.setAttribute( 'height', illoSize * zoom );
 
 var illo = new Zdog.Illustration({
   element: illoElem,

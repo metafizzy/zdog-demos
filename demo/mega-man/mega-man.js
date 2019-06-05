@@ -1,12 +1,11 @@
 // -------------------------- demo -------------------------- //
 
 var illoElem = document.querySelector('.illo');
-var w = 72;
-var h = 72;
+var illoSize = 72;
 var minWindowSize = Math.min( window.innerWidth, window.innerHeight );
-var zoom = Math.min( 7, Math.floor( minWindowSize / w ) );
-illoElem.setAttribute( 'width', w * zoom );
-illoElem.setAttribute( 'height', h * zoom );
+var zoom = Math.floor( minWindowSize / illoSize );
+illoElem.setAttribute( 'width', illoSize * zoom );
+illoElem.setAttribute( 'height', illoSize * zoom );
 var isSpinning = true;
 var TAU = Zdog.TAU;
 
@@ -193,8 +192,13 @@ new Zdog.Shape({
 });
 
 [ -1, 1 ].forEach( function( xSide ) {
-  // face panel
+
+  var facePanelGroup = new Zdog.Group({
+    addTo: head,
+  });
+
   var facePanel = new Zdog.Shape({
+    addTo: facePanelGroup,
     path: [
       { x: 4*xSide, y: -4, z: -1 }, // top inside brow
       { arc: [
@@ -216,23 +220,24 @@ new Zdog.Shape({
     fill: true,
     stroke: 1,
     color: skin,
-    addTo: head,
   });
 
   // eye whites
   var eyeWhite = new Zdog.Ellipse({
+    addTo: facePanel,
     width: 4,
     height: 5,
-    addTo: facePanel,
     translate: { x: 3.75*xSide, y: -0.5, z: 0.5 },
     rotate: { y: -0.2*xSide },
     stroke: 1,
     fill: true,
     color: 'white',
+    backface: false,
   });
 
   // pupils
   var pupil = new Zdog.Ellipse({
+    addTo: eyeWhite,
     width: 1,
     height: 4,
     translate: { x: -0.4*xSide, y: -0.2, z: 1 },
@@ -240,7 +245,7 @@ new Zdog.Shape({
     stroke: 1,
     fill: true,
     color: '#128',
-    addTo: eyeWhite,
+    backface: false,
   });
   // add to hash
   pupils[ xSide ] = pupil;
