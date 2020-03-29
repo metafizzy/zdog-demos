@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Bigger, wilder Zdog demos",
   "dependencies": {
-    "zdog": "^1.0.0"
+    "zdog": "^1.1.2"
   },
   "devDependencies": {
     "jshint": "^2.10.2"
